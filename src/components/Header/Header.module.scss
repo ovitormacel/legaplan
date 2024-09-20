@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    height: 84px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #D7DDE9;
+
+    .logo {
+        width: 30%;
+    }
+
+    .welcome {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .date {
+        width: 30%;
+        font-size: 1em;
+        text-align: end;
+        color: #000000;
+        opacity: .5;
+        line-height: 19px;
+    }
+}
