@@ -2,10 +2,26 @@
 
 import { useState } from "react";
 import styles from "./AddNewTask.module.scss";
+import tasksService from "@/services/tasksService";
+
+import { useContext } from "react";
+import TasksContext from "@/contexts/TasksContext";
 
 const AddNewTask = () => {
 
+    const list = useContext(TasksContext);
+
     const [modalVisible, setModalVisible] = useState(false);
+    
+    const [titleInput, setTitleInput] = useState("");
+
+    const submitANewTask = () => {
+        const newList = tasksService.addNewTask(titleInput);
+        list.setTasks(JSON.parse(newList));
+
+        setTitleInput("");
+        setModalVisible(false);
+    }
 
     return (
         <>
@@ -17,12 +33,12 @@ const AddNewTask = () => {
 
                     <div className={styles.inputBox}>
                         <label htmlFor="taskTitle">Título</label>
-                        <input type="text" name="taskTitle" className={styles.newTaskInput} placeholder="Digite"/>
+                        <input onChange={(e) => setTitleInput(e.target.value)} value={titleInput} type="text" name="taskTitle" className={styles.newTaskInput} placeholder="Digite"/>
                     </div>
 
                     <div className={styles.actions}>
                         <button className={styles.btnAction} onClick={() => setModalVisible(false)}>Cancelar</button>
-                        <button className={`${styles.btnAction} ${styles.add}`}>Adicionar</button>
+                        <button onClick={() => submitANewTask()} className={`${styles.btnAction} ${styles.add}`}>Adicionar</button>
                     </div>
                 </div>
             </div>
