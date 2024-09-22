@@ -15,7 +15,9 @@ export default function Home() {
   const [tasks, setTasks] = useState();
 
   useEffect(() => {
-    setTasks(JSON.parse(localStorage.getItem("allTasks")));
+    if(typeof localStorage !== 'undefined') {
+      setTasks(JSON.parse(localStorage.getItem("allTasks")));
+    }
   }, [])
 
   return (
