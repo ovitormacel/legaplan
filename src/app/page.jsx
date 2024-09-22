@@ -8,11 +8,15 @@ import Header from "@/components/Header";
 import AllTasks from "@/components/AllTasks";
 
 import TasksContext from "@/contexts/TasksContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("allTasks")));
+  const [tasks, setTasks] = useState();
+
+  useEffect(() => {
+    setTasks(JSON.parse(localStorage.getItem("allTasks")));
+  }, [])
 
   return (
     <>

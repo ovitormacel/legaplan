@@ -106,7 +106,7 @@ const TasksService = () => {
         }
     }
 
-    return {addNewTask, getAllTasks, completeTask, pendingTask, deleteTask,}
+    return {addNewTask, completeTask, pendingTask, deleteTask,}
 }
 
 export default TasksService;
