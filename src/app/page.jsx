@@ -6,12 +6,15 @@ import styles from "./styles/page.module.scss";
 //Components
 import Header from "@/components/Header";
 import AllTasks from "@/components/AllTasks";
-import tasksService from "@/services/tasksService";
+import TasksService from "./services/tasksService";
+
 import TasksContext from "@/contexts/TasksContext";
 import { useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState(tasksService.getAllTasks());
+  const {getAllTasks} = TasksService();
+
+  const [tasks, setTasks] = useState(getAllTasks());
 
   return (
     <>

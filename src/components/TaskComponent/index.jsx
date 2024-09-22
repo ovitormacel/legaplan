@@ -1,6 +1,6 @@
 'use client'
 
-import tasksService from "@/services/tasksService";
+import TasksService from "@/app/services/tasksService";
 import DeleteTask from "../DeleteTask";
 import styles from "./TaskComponent.module.scss"
 
@@ -11,6 +11,8 @@ import { useState } from "react"
 
 const TaskComponent = ({title, finished = false}) => {
 
+    const {completeTask, pendingTask} = TasksService();
+
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
     const list = useContext(TasksContext);
@@ -19,14 +21,14 @@ const TaskComponent = ({title, finished = false}) => {
         setOpenDeleteModal(false);
     }
 
-    const completeTask = () => {
-        const newList = tasksService.completeTask(title);
+    const completeTaskFn = () => {
+        const newList = completeTask(title);
         
         list.setTasks(newList);
     }
 
-    const pendingTask = () => {
-        const newList = tasksService.pendingTask(title);
+    const pendingTaskFn = () => {
+        const newList = pendingTask(title);
         
         list.setTasks(newList);
     }
@@ -34,7 +36,7 @@ const TaskComponent = ({title, finished = false}) => {
     return (
         <li className={styles.task}>
             <div className={styles.taskInfos}>
-                <button onClick={finished ? () => pendingTask() : () => completeTask()} className={`${styles.checkTask} ${finished ? styles.finished : ""}`}>
+                <button onClick={finished ? () => pendingTaskFn() : () => completeTaskFn()} className={`${styles.checkTask} ${finished ? styles.finished : ""}`}>
                     {finished ? (
                         <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 1.5L4.75 9.75L1 6" stroke="#0796D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

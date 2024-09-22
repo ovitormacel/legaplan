@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import styles from "./AddNewTask.module.scss";
-import tasksService from "@/services/tasksService";
+import TasksService from "@/app/services/tasksService";
 
 import { useContext } from "react";
 import TasksContext from "@/contexts/TasksContext";
 
 const AddNewTask = () => {
+
+    const {addNewTask} = TasksService();
 
     const list = useContext(TasksContext);
 
@@ -16,7 +18,7 @@ const AddNewTask = () => {
     const [titleInput, setTitleInput] = useState("");
 
     const submitANewTask = () => {
-        const newList = tasksService.addNewTask(titleInput);
+        const newList = addNewTask(titleInput);
         list.setTasks(JSON.parse(newList));
 
         setTitleInput("");

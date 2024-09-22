@@ -4,17 +4,16 @@ import { useEffect, useState } from "react";
 import AddNewTask from "../AddNewTask";
 import TaskComponent from "../TaskComponent";
 import styles from "./AllTasks.module.scss";
-import tasksService from "@/services/tasksService";
 
 import { useContext } from "react";
 import TasksContext from "@/contexts/TasksContext";
 
 const AllTasks = () => {
-    
+
     const list = useContext(TasksContext);
 
     useEffect(() => {
-        const listTasks = tasksService.getAllTasks();
+        const listTasks = JSON.parse(localStorage.getItem("allTasks"));
 
         if(!listTasks){
             const basicList = {
@@ -31,7 +30,10 @@ const AllTasks = () => {
 
             localStorage.setItem("allTasks", JSON.stringify(basicList));
             list.setTasks(basicList);
-
+        
+        } else {
+            localStorage.setItem("allTasks", JSON.stringify(listTasks));
+            list.setTasks(listTasks);
         }
 
     }, [])

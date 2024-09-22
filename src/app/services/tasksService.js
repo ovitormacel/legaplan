@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-const tasksService = {
-    addNewTask: (title) => {
+const TasksService = () => {
+    const addNewTask = (title) => {
         const tasks = localStorage.getItem("allTasks");
 
         if(tasks) {
@@ -17,19 +17,11 @@ const tasksService = {
                 finished: []
             }
 
-            localStorage.setItem("allTasks", JSON.stringify(newList))
-
             return JSON.stringify(newList);
         }
-    },
+    };
 
-    getAllTasks: () => {
-        const tasks = localStorage.getItem("allTasks");
-
-        return JSON.parse(tasks);
-    },
-
-    completeTask: (title) => {
+    const completeTask = (title) => {
         let list = JSON.parse(localStorage.getItem("allTasks"));
         let indexnmb;
 
@@ -49,9 +41,9 @@ const tasksService = {
         localStorage.setItem("allTasks", JSON.stringify(list))
 
         return list;
-    },
+    };
 
-    pendingTask: (title) => {
+    const pendingTask = (title) => {
         let list = JSON.parse(localStorage.getItem("allTasks"));
         let indexnmb;
 
@@ -71,9 +63,9 @@ const tasksService = {
         localStorage.setItem("allTasks", JSON.stringify(list))
 
         return list;
-    },
+    };
 
-    deleteTask: (title, finished) => {
+    const deleteTask = (title, finished) => {
         let list = JSON.parse(localStorage.getItem("allTasks"));
         let indexnmb;
 
@@ -113,6 +105,8 @@ const tasksService = {
 
         }
     }
+
+    return {addNewTask, getAllTasks, completeTask, pendingTask, deleteTask,}
 }
 
-export default tasksService;
+export default TasksService;

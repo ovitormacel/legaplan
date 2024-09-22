@@ -1,6 +1,6 @@
 "use client"
 
-import tasksService from "@/services/tasksService";
+import TasksService from "@/app/services/tasksService";
 import styles from "./DeleteTask.module.scss";
 
 import { useContext } from "react";
@@ -10,8 +10,10 @@ const DeleteTask = ({taskTitle, finished, modalVisible, close}) => {
     
     const list = useContext(TasksContext);
 
-    const deleteTask = () => {
-        const newList = tasksService.deleteTask(taskTitle, finished);
+    const {deleteTask} = TasksService();
+
+    const deleteTaskFn = () => {
+        const newList = deleteTask(taskTitle, finished);
         
         list.setTasks(newList);
 
@@ -28,7 +30,7 @@ const DeleteTask = ({taskTitle, finished, modalVisible, close}) => {
 
                     <div className={styles.actions}>
                         <button className={styles.btnAction} onClick={() => {close()}}>Cancelar</button>
-                        <button className={`${styles.btnAction} ${styles.delete}`} onClick={() => {deleteTask()}}>Deletar</button>
+                        <button className={`${styles.btnAction} ${styles.delete}`} onClick={() => {deleteTaskFn()}}>Deletar</button>
                     </div>
                 </div>
             </div>
