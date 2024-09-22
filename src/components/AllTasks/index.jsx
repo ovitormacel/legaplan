@@ -10,26 +10,50 @@ import { useContext } from "react";
 import TasksContext from "@/contexts/TasksContext";
 
 const AllTasks = () => {
-
+    
     const list = useContext(TasksContext);
 
+    useEffect(() => {
+        const listTasks = tasksService.getAllTasks();
+
+        if(!listTasks){
+            const basicList = {
+                pending: [
+                    {title: "Lavar as mãos"},
+                    {title: "Fazer um bolo"},
+                    {title: "Lavar a louça"}
+                ],
+
+                finished: [
+                    {title: "Levar o lixo para fora"}
+                ]
+            }
+
+            localStorage.setItem("allTasks", JSON.stringify(basicList));
+            list.setTasks(basicList);
+
+        }
+
+    }, [])
+
+
     return (
-        <section className={styles.taskSection}>
+        <section className={`${styles.taskSection} container`}>
             <div className={styles.tasksContainer}>
                 <p className={styles.taskTitle}>Suas tarefas de hoje</p>
                 
                 <ul className={styles.taskList}>
-                    {list.tasks ? list.tasks.pending.map((el) => (
-                        <TaskComponent title={el.title}/>
-                    )) : (<p>Nenhuma tarefa encontrada.</p>)}
+                    {list.tasks ? list.tasks.pending.map((el, index) => (
+                        <TaskComponent key={index} title={el.title}/>
+                    )) : (<p className={styles.noTasks}>Nenhuma tarefa pendente.</p>)}
                 </ul>
 
                 <p className={`${styles.taskTitle} ${styles.finishedTitle}`}>Tarefas Finalizadas</p>
                 
                 <ul className={styles.finishedTasks}>
-                    {list.tasks ? list.tasks.finished.map((el) => (
-                        <TaskComponent title={el.title} finished={true}/>
-                    )) : (<p>Nenhuma tarefa encontrada.</p>)}
+                    {list.tasks ? list.tasks.finished.map((el, index) => (
+                        <TaskComponent key={index} title={el.title} finished={true}/>
+                    )) : (<p className={styles.noTasks}>Nenhuma tarefa finalizada.</p>)}
                 </ul>
             </div>
 

@@ -14,8 +14,8 @@
         align-items: center;
         
         .checkTask {
-            width: 24px;
-            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
             background-color: transparent;
             border: 1px solid #D7DDE9;
             border-radius: .3em;
@@ -33,6 +33,9 @@
         }
 
         .taskName {
+            word-wrap: break-word;
+            word-break: break-all;
+
             &.finished {
                 color: #0000008A;
                 text-decoration: line-through;

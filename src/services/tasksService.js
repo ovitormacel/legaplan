@@ -1,3 +1,5 @@
+"use client"
+
 const tasksService = {
     addNewTask: (title) => {
         const tasks = localStorage.getItem("allTasks");

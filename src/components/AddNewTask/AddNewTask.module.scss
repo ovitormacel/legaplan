@@ -8,6 +8,7 @@
     font-size: 16px;
     color: #ffffff;
     font-weight: 500;
+    margin-bottom: 100px;
 
     &:hover {
         cursor: pointer;
@@ -92,6 +93,23 @@
                     color: #ffffff;
                     font-weight: 500;
                 }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px){
+    .addTaskModalBackground {
+        background-color: rgba($color: #ffffff, $alpha: 1);
+        align-items: start;
+    
+        .addTaskModal {
+            background-color: #ffffff;
+            box-shadow: none;
+            padding: 24px;
+    
+            .actions {
+                flex-direction: column-reverse;
             }
         }
     }

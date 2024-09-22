@@ -1,6 +1,23 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 
 const Header = () => {
+
+    const months = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+    const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
+    const convertDateToString = () => {
+        const date = new Date(Date.now());
+
+        const dateString = `${days[date.getDay()]}, ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`
+
+        return dateString;
+    }
+
+    const [date, setDate] = useState(convertDateToString());
+
     return (
         <header className={`${styles.header} container`}>
             <div className={styles.logo}>
@@ -24,7 +41,7 @@ const Header = () => {
             </div>
 
             <div className={styles.date}>
-                <p>Segunda, 01 de Dezembro de 2025</p>
+                <p>{date}</p>
             </div>
         </header>
     )
